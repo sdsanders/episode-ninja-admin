@@ -93,7 +93,8 @@ class Dashboard extends Component {
             }
           ],
         }
-      }
+      },
+      isFetching: true
     };
   }
 
@@ -119,6 +120,7 @@ class Dashboard extends Component {
       this.state.analytics.activeUsers = analytics.activeUsers;
 
       this.setState({analytics: this.state.analytics});
+      this.setState({isFetching: false});
     }).catch(err => {
       console.error(err);
     });
@@ -127,6 +129,9 @@ class Dashboard extends Component {
   }
 
   render() {
+    if (this.state.isFetching) {
+      return (<div className="text-center"><i className="fa fa-spinner fa-lg fa-spin mt-4" /></div>);
+    }
     return (
       <div>
         <Row>
